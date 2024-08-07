@@ -1,7 +1,7 @@
 **206:-Reverse A linked List**
 Three variable and four step
 
-
+```
   public ListNode reverseList(ListNode head) {
 
   // we need three variable and 4 step
@@ -17,9 +17,10 @@ Three variable and four step
     return prev;
 
  } 
-
+```
 ** 876:- Find middle element of linked list **
  slow fast approach 
+ ```
    public ListNode middleNode(ListNode head) {
         ListNode fast = head;
         ListNode slow = head;
@@ -29,10 +30,12 @@ Three variable and four step
         }
         return slow;  
     }
+```
+
 **    21. Merge Two Sorted Lists**
 we have to create a dummy linked list then we have to compare the value of given two linked based upon that
 we have to assing the next of dummy to that node and at last which ever is left just point the next of dummy to it
-
+```
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode dummy = new ListNode(-1);
@@ -63,13 +66,15 @@ class Solution {
         return dummy.next;
 }
 }
-
+```
 **19. Remove Nth Node From End of List**
 Approach:-
 first find the size of the linked list
 then run a loop till the size-n-1
 after that make the curr.next = curr.next.next
 Code:- 
+
+```
 class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
      //first find the size of the linked list
@@ -91,6 +96,7 @@ class Solution {
         return head;
     }
 }
+```
 
 **2 Add two No**
 Approach:-
@@ -102,6 +108,7 @@ before finding val just make sure the Linked list are not empty
 fint the carry after adding and digit also which we have to add my modulo 
 then make a new node and point next of dummy to it
 
+```
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         // Dummy node to form the result list
@@ -140,18 +147,19 @@ class Solution {
         return dummy.next;
     }
 }
-
+```
 
 **237: Delete node in LinkedList**
 
 for deleting any value we have to make the prev.next = prev.next.next but in our case only node is given we will store the value of next node to node and delete the next
-
+```
 class Solution {
     public void deleteNode(ListNode node) {
         node.val = node.next.val;  //store the value of next node in the node and delete next node    
         node.next = node.next.next;
     }
 }
+```
 
 
 
