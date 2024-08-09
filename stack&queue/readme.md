@@ -163,6 +163,7 @@ at last chack whether stack is empty or not
 
 **Approach 2**
 
+
 ```
 class Solution {
     public boolean isValid(String s) {
@@ -190,3 +191,4 @@ class Solution {
     }
 }
 ```
+**496. Next Greater Element I**
