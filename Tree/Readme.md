@@ -351,7 +351,126 @@ class Solution {
     }
 }
 ```
-**Vertical Order:-**
+**987. Vertical Order Traversal of a Binary Tree**
+Approach:-
+So this is very similar to the top view but with a small difference we have not return only the first column value for the particular horizontal distance
+instead we have to return all value for the particular distance
+So to handle this we will create a treemap with integer and ArrayList
+integer is for horizontal distance and arrayList is for string all the value for the particular distance
+now the catch is for horizontal distance we have to return value based on level like the first level val will come first 
+so for that we will add a level of type int in Pair class and during returnnig the answer we have to sort it and based on that we have to return the ans
+
+Simple Explanation:
+Purpose of the Code: This code performs a vertical order traversal of a binary tree, where nodes are grouped by their horizontal distance from the root. Nodes that are on the same vertical line are then sorted by their level (depth), and if they share the same level, they are sorted by their value.
+
+Pair Class:
+
+Stores three things: the node, its horizontal distance from the root (hd), and its level in the tree (level).
+TreeMap:
+
+Used to group nodes by their horizontal distance (hd). Keys in TreeMap are naturally sorted, so the traversal order will be maintained.
+Queue and Level Order Traversal:
+
+The tree is traversed level by level using a queue. For each node, its horizontal distance and level are updated and stored in the TreeMap.
+Sorting Nodes:
+
+Within each horizontal distance, nodes are sorted first by their level, and then by their value if levels are the same.
+Result Construction:
+
+After sorting, the node values are extracted and added to the final result list, which is then returned as the output.
+This approach ensures that the nodes are correctly ordered both horizontally and vertically in the final output.
+
+
+
+```
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    // A helper class to store the node, its horizontal distance, and its level
+    static class Pair {
+        int hd; // Horizontal distance from the root
+        int level; // Level (depth) of the node
+        TreeNode node; // The actual tree node
+        
+        public Pair(int hd, int level, TreeNode node) {
+            this.hd = hd;
+            this.level = level;
+            this.node = node;
+        }
+    }
+    
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+        // TreeMap to store nodes according to their horizontal distance (hd)
+        TreeMap<Integer, List<Pair>> tm = new TreeMap<>();
+        // Queue for level order traversal of the tree
+        Queue<Pair> q = new LinkedList<>();
+        // Start with the root node at horizontal distance 0 and level 0
+        q.add(new Pair(0, 0, root));
+        
+        // Level order traversal of the tree
+        while (!q.isEmpty()) {
+            Pair curr = q.remove(); // Get the current node and its position
+            int hd = curr.hd;
+            int level = curr.level;
+            TreeNode node = curr.node;
+            
+            // If the horizontal distance is encountered for the first time, create a list
+            tm.putIfAbsent(hd, new ArrayList<>());
+            // Add the current node to the list corresponding to its horizontal distance
+            tm.get(hd).add(new Pair(hd, level, node));
+            
+            // If there is a left child, add it to the queue with hd-1 (left shift) and level+1
+            if (node.left != null) {
+                q.add(new Pair(hd - 1, level + 1, node.left));
+            }
+            // If there is a right child, add it to the queue with hd+1 (right shift) and level+1
+            if (node.right != null) {
+                q.add(new Pair(hd + 1, level + 1, node.right));
+            }
+        }
+        
+        // Prepare the final result list
+        List<List<Integer>> ans = new LinkedList<>();
+        
+        // Process each horizontal distance (key) in the TreeMap
+        for (List<Pair> entry : tm.values()) {
+            // Sort the list of nodes first by their level, then by their value if levels are the same
+            entry.sort((a, b) -> {
+                if (a.level == b.level) {
+                    return a.node.val - b.node.val; // If levels are the same, sort by value
+                } else {
+                    return a.level - b.level; // Otherwise, sort by level
+                }
+            });
+            
+            // Collect the sorted node values into a list
+            List<Integer> sortedValues = new ArrayList<>();
+            for (Pair p : entry) {
+                sortedValues.add(p.node.val);
+            }
+            // Add this list to the final result
+            ans.add(sortedValues);
+        }
+        
+        // Return the final vertical order traversal result
+        return ans;
+    }
+}
+```
+
 
 
 
