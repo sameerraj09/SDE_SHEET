@@ -470,7 +470,41 @@ class Solution {
     }
 }
 ```
+**Root to leaf Path:-**
+Approach:-
+Just make a ans array of arrayList and a current array whenever we encounter it is a leaf node add curr to answer and do normal traversal and when root node case hit just remove a element from the curr
 
+```
+class Solution {
+    public static ArrayList<ArrayList<Integer>> Paths(Node root) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+        path(ans, new ArrayList<>(), root);
+        return ans;
+    }
+
+    public static void path(ArrayList<ArrayList<Integer>> ans, ArrayList<Integer> curr, Node root) {
+        // Base case: if the current node is null, return
+        if (root == null) {
+            return;
+        }
+
+        // Add the current node's data to the path
+        curr.add(root.data);
+
+        // If it's a leaf node, add the current path to the answer
+        if (root.left == null && root.right == null) {
+            ans.add(new ArrayList<>(curr));  // Add a copy of the current path
+        } else {
+            // Recur for the left and right subtrees
+            path(ans, curr, root.left);
+            path(ans, curr, root.right);
+        }
+
+        // Backtrack: remove the current node's data from the path
+        curr.remove(curr.size() - 1);
+    }
+}
+```
 
 
 
