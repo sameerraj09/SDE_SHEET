@@ -505,6 +505,42 @@ class Solution {
     }
 }
 ```
+**662. Maximum Width of Binary Tree**
+Approach:-We have to find the max node available for any level
+To find this we will create a dequeue and create a class pair which store the Node and it's pos like when it came by using the property of left and right child (parentpos*2,parentpos*2+1) 
+before each level we will try to find the width by dq.getFirst().value - dq.getLast().last formula and update the answer for each level and at last return the ans
+![image](https://github.com/user-attachments/assets/13b3c9fb-739b-4e47-b59c-d4d25f25dae8)
+```
+class Solution {
+     class Pair{
+        TreeNode node;
+        int pos;
+        Pair(TreeNode node,int pos){
+            this.node = node;
+            this.pos = pos;
+        }
+    }
+    public int widthOfBinaryTree(TreeNode root) {
+        int ans = 0;
+
+        Deque<Pair> dq = new LinkedList<>();
+        dq.add(new Pair(root,1));
+        while(!dq.isEmpty()){
+           int max = (dq.getLast().pos - dq.getFirst().pos +1 );
+           ans = Math.max(ans,max);
+          int size = dq.size();
+          for(int i = 0;i<size;i++){
+            Pair curr = dq.pop();
+            TreeNode node = curr.node;
+            int pos = curr.pos;
+            if(node.left!=null) dq.add(new Pair(node.left,pos*2));
+            if(node.right!=null) dq.add(new Pair(node.right,pos*2+1));
+          }
+        }
+        return ans;
+    }
+}
+```
 
 
 
