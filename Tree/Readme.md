@@ -541,6 +541,75 @@ class Solution {
     }
 }
 ```
+**102. Binary Tree Level Order Traversal**
+Approach:-Create a queue and add root element to it
+after that run a loop till the queue will not empty
+and remove the element from the queue and add the val to the curr arrayList
+and check for it's left and tight child if it is there add it in queue
 
+```
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans = new LinkedList<>();
+        if(root==null) return ans;
 
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            List<Integer> curr = new LinkedList<>();
+            int size  = q.size();
+            for(int i = 0;i<size;i++){
+                TreeNode node = q.remove();
+                curr.add(node.val);
+                if(node.left!=null) q.add(node.left);
+                if(node.right!=null) q.add(node.right);
+            }
+            ans.add(curr);
+            
+        }
+        return ans;
+    }
+}
+```
 
+**104. Maximum Depth of Binary Tree**
+```
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        int lh = maxDepth(root.left);
+        int rh = maxDepth(root.right);
+        return Math.max(lh,rh)+1;
+    }
+}
+```
+
+**543. Diameter of Binary Tree**
+Approach:-
+first find the height of left subtree and rightsubtree
+and then find the left diam and right diam 
+vcs migth be the diam will exist it right subtree or left subtree ir might be passed through root so return max of that
+```
+class Solution {
+    public int height(TreeNode root){
+        if(root==null){
+            return 0;
+        }
+        int lh  = height(root.left);
+        int rh  = height(root.right);
+        return Math.max(lh,rh)+1;
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        int leftheight= height(root.left);
+        int rightheight= height(root.right);
+        int leftdiam  = diameterOfBinaryTree(root.left);
+        int rightdiam  = diameterOfBinaryTree(root.right);
+        int selfdiam = leftheight+rightheight;
+        return Math.max(selfdiam,Math.max(leftdiam,rightdiam));
+    }
+}
