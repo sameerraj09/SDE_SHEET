@@ -43,4 +43,47 @@ class Solution {
 
 ```
 
+**Minimum Platforms**
+Approach:-
+Sort the arrival and departure 
+check the condition whether the arrival is greater than the previous train departure or not
+if no increase the platform and update the i for seeing next train coming time
+if yes decreae the patform and update the departure and increase the j 
+```
+class Solution {
+    // Function to find the minimum number of platforms required at the
+    // railway station such that no train waits.
+    static int findPlatform(int arr[], int dep[]) {
+        // Sort the arrival and departure times
+        Arrays.sort(arr);
+        Arrays.sort(dep);
+        
+        // Initialize platform count and maximum platforms needed
+        int i = 1, j = 0;
+        int platformNeeded = 1;
+        int maxPlatform = 1;
+        
+        // Iterate through the arrival and departure times
+        while (i < arr.length && j < dep.length) {
+            // If the next train is arriving before the previous one departs,
+            // increase platform count
+            if (arr[i] <= dep[j]) {
+                platformNeeded++;
+                i++;
+            }
+            // Else, decrease platform count as a train has departed
+            else {
+                platformNeeded--;
+                j++;
+            }
+            // Update the maximum platforms required
+            maxPlatform = Math.max(maxPlatform, platformNeeded);
+        }
+        
+        // Return the maximum number of platforms required
+        return maxPlatform;
+    }
+}
+```
+
 
