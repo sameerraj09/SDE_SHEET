@@ -139,3 +139,56 @@ class Solution {
     }
 }
 ```
+**547. Number of Provinces**
+Approach:- We can utilize the graph component concept for this whenver it will break we will increase the count and return the count
+
+```
+class Solution {
+    public int findCircleNum(int[][] isConnected) {
+        int province = 0;
+        boolean[] visited = new boolean[isConnected.length];
+        for(int i=0; i<visited.length;i++){
+                // unvisited nodes pe dfs call krdo
+            if(!visited[i]){
+                dfs(i, isConnected, visited);
+                province++;
+            }
+        }
+        return province;
+    }
+    public void dfs(int current, int[][] graph, boolean[] visited){
+        visited[current] = true;
+        for(int i=0; i<graph[current].length;i++){
+                // current ke univisited neighbours pe dfs call krlo
+            if(!visited[i] && graph[current][i] == 1)
+                dfs(i, graph, visited);
+        }
+    }
+}
+
+```
+**Same q is given**
+**If ArrayArrayList is given**
+```
+class Solution {
+    static int numProvinces(ArrayList<ArrayList<Integer>> adj, int V) {
+        // code here
+        boolean vis[] = new boolean[V];
+        int count=0;
+        for(int i =0;i<V;i++){
+            if(!vis[i]){
+                dfsutil(i , adj , vis);
+                count++;
+            }
+        }
+        return count;
+    }
+    public static void dfsutil(int curr , ArrayList<ArrayList<Integer>> adj,boolean vis[]){
+        vis[curr] = true;
+        for(int i=0;i<adj.get(curr).size();i++){
+            if(!vis[i] && adj.get(curr).get(i)==1){
+                dfsutil(i , adj,vis);
+            }
+        }
+    } 
+};
