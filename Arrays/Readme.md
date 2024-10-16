@@ -1,4 +1,5 @@
 **73. Set Matrix Zeroes**
+
 Store zero positions: Traverse the matrix and save the indices of all zeros.
 Set rows and columns to zero: For each saved zero, set the entire row and column to zero using a helper function.
 ```
@@ -38,6 +39,7 @@ class Solution {
 **118. Pascal's Triangle**
 
 Steps to Generate Pascal's Triangle:
+
 Initialize an empty list: Create an outer list ans to store all rows of the triangle.
 Iterate through rows: For each row (from 0 to numRows-1):
 Start a new list curr for the current row.
@@ -72,6 +74,7 @@ class Solution {
 ```
 
 **31. Next Permutation**
+
 loop reverse chalao agar nums[i+1]<nums[i] to break kar do
 Find the first decreasing element from the end (right to left):
 uske baad hame fir se ulta loop chalana hai aur jaise hi koi number nums[i] se bada mile usse swap karo do 
