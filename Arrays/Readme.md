@@ -162,6 +162,116 @@ class Solution {
 
 ```
 
+**53. Maximum Subarray**
+
+Approach:-
+
+Initialize variables:
+
+cs (current sum) starts at 0.
+
+ans (maximum sum so far) starts at the smallest possible integer.
+
+Traverse the array:
+
+For each element in the array:
+
+If cs (current sum) becomes negative, reset it to 0 (to avoid carrying a negative sum forward).
+
+Add the current element to cs.
+
+Update ans with the maximum of cs and ans.
+
+Return the maximum sum (ans):
+```
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int cs = 0;
+        int ans = Integer.MIN_VALUE;
+        for(int i = 0;i<nums.length;i++){
+            if(cs<0){
+                cs = 0;
+            }
+            cs+=nums[i];
+            ans = Math.max(cs,ans);
+        }
+        return ans;
+    }
+}
+```
+
+**Sort an array of 0's, 1's and 2's**
+
+Approach:-
+
+Count the no of zero present in an array and no of one in array 
+
+now start a loop till no of zeros and start filling the value 0
+
+after that do same for 1 
+
+```
+class Solution {
+    public void sortColors(int[] nums) {
+         //Arrays.sort(nums);
+
+         //fanda clear hai zero count karo ones count karo aur fir utne zero aur one array me daal do aur baki me 2 daal do
+           int zero = 0;
+            int ones = 0;
+            for(int i = 0;i<nums.length;i++){
+                if(nums[i]==0){
+                    zero++;
+                }
+                else if(nums[i]==1){
+                    ones++;
+                }
+                
+            }
+            int i = 0;
+            while(zero>0){
+                nums[i]=0;
+                zero--;
+                i++;
+            }
+            while(ones>0){
+                nums[i]=1;
+                ones--;
+                i++;
+            }
+            while(i<nums.length){
+                nums[i]=2;
+                i++;
+            }
+    }
+}
+```
+
+**Stock Buy and Sell**
+
+Approach:-
+
+there is simple logic if the current price of stock is less than the earlier cp then buy it 
+
+else sell it and find profit by subtracting the value and compare that value with the max profit if it is largest update it
+
+```
+class Solution {
+    public int maxProfit(int[] prices) {
+        int cp = prices[0];  //pehla stock kharod lo
+        int maxprofit = 0;
+        for(int i=1;i<prices.length;i++){
+            if(cp<prices[i]){  // aab avi wala stock mehnga hai prev wale se profit pata karo
+                int profit = prices[i]-cp;
+                maxprofit = Math.max(maxprofit,profit);
+            }
+            else{
+                   cp = prices[i];   // stock sasta hai pehle wale se
+            }
+        }
+        return maxprofit;
+    }
+}
+```
 
 
 **1752. Check if Array Is Sorted and Rotated**
