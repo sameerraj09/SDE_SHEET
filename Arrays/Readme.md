@@ -40,14 +40,24 @@ class Solution {
 
 Steps to Generate Pascal's Triangle:
 
-Initialize an empty list: Create an outer list ans to store all rows of the triangle.
+Initialize an empty list: 
+
+Create an outer list ans to store all rows of the triangle.
+
 Iterate through rows: For each row (from 0 to numRows-1):
+
 Start a new list curr for the current row.
+
 Add 1 as the first element of each row.
+
 For intermediate elements (between the first and last), calculate the sum of the two numbers directly above from the previous row.
+
 Add 1 as the last element for rows greater than 0.
+
 Add current row: Append the curr list to the main ans list.
+
 Return the result: Once all rows are generated, return the complete triangle.
+
 This method builds each row based on the previous row’s values.
 
 ```
@@ -76,23 +86,36 @@ class Solution {
 **31. Next Permutation**
 
 loop reverse chalao agar nums[i+1]<nums[i] to break kar do
-Find the first decreasing element from the end (right to left):
-uske baad hame fir se ulta loop chalana hai aur jaise hi koi number nums[i] se bada mile usse swap karo do 
-agar aisa kuch nahi mila to wo max pe hai to seedha reverse kar do wahi ans hoga
-GPT:-(Simple explanation)
-Explanation: 
-We need to find the point from which we can increase the sequence to the next greater permutation. So, starting from the second-to-last element (nums.length - 2), we move leftwards until we find an element nums[i] that is smaller than its next element nums[i+1].
 
-Reason: This nums[i] is the first element that can be swapped to create a greater permutation. If no such element is found (i.e., the entire array is in non-increasing order), it means the array is the highest permutation possible, and the next permutation will be the smallest one (reverse the entire array).
+Find the first decreasing element from the end (right to left):
+
+uske baad hame fir se ulta loop chalana hai aur jaise hi koi number nums[i] se bada mile usse swap karo do 
+
+agar aisa kuch nahi mila to wo max pe hai to seedha reverse kar do wahi ans hoga
+
+GPT:-(Simple explanation)
+
+Explanation: 
+
+We need to find the point from which we can increase the sequence to the next greater permutation. So, starting from the second-to-last element (nums.length - 2), we 
+move leftwards until we find an element nums[i] that is smaller than its next element nums[i+1].
+
+
+Reason: This nums[i] is the first element that can be swapped to create a greater permutation. If no such element is found (i.e., the entire array is in non-
+
+increasing order), it means the array is the highest permutation possible, and the next permutation will be the smallest one (reverse the entire array).
 
 Find the smallest number larger than nums[i] to swap:
 
 Explanation: Once we find nums[i], we need to swap it with the smallest number that's larger than nums[i]. This ensures that the new permutation is the next lexicographically greater one.
+
 How: Start from the last element (nums.length - 1) and move leftwards until you find an element nums[j] that is greater than nums[i].
 
 Reverse the portion after the swapped element:
 
-Explanation: After swapping nums[i] and nums[j], the portion of the array to the right of index i is still in non-increasing order. To get the smallest possible permutation, we reverse this part to make it the smallest possible sequence.
+Explanation: After swapping nums[i] and nums[j], the portion of the array to the right of index i is still in non-increasing order. To get the smallest possible 
+permutation, we reverse this part to make it the smallest possible sequence.
+
 Why reverse?: Because reversing a decreasing sequence gives the smallest lexicographical order.
 
 ![image](https://github.com/user-attachments/assets/716da84f-8266-49e3-a0cf-410a02f72023)
