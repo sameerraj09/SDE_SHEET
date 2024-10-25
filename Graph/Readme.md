@@ -1,3 +1,5 @@
+**Given an integer n representing number of vertices. Find out how many undirected graphs (not necessarily connected) can be constructed out of a given n number of vertices.**
+
 Notes:-
 The maximum number of edges in an undirected graph is n(n-1)/2 and obviously in a directed graph there are twice as many. 
 If the graph is not a multi graph then it is clearly n * (n - 1), as each node can at most have edges to every other node
@@ -11,13 +13,15 @@ Q Given an integer n representing number of vertices. Find out how many undirect
 class Solution {
     static long count(int n) {
     // code here
-    return (long)Math.pow(2,n+1);
+    return (long)Math.pow(2,n*(n-1)/2);
 
   }
 }
 ```
-Given an undirected graph with V nodes and E edges, create and return an adjacency list of the graph. 0-based indexing is followed everywhere.
+**Given an undirected graph with V nodes and E edges, create and return an adjacency list of the graph. 0-based indexing is followed everywhere.**
+
 Approach:-
+
 Aceess each elemnt of matrix and put the dest val in src place in ans arraylist(iski biwi uske sath)
 ```
 class Solution {
@@ -37,6 +41,7 @@ class Solution {
     }
 }
 ```
+
 **BFS:-**
 Approach:-
 Queue me src ko add karo aur loop chala do jab tak loop khali nahi ho jata 
