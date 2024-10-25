@@ -149,27 +149,35 @@ Approach:- We can utilize the graph component concept for this whenver it will b
 
 ```
 class Solution {
+    // Main method to find the number of provinces (disconnected components)
     public int findCircleNum(int[][] isConnected) {
-        int province = 0;
-        boolean[] visited = new boolean[isConnected.length];
-        for(int i=0; i<visited.length;i++){
-                // unvisited nodes pe dfs call krdo
-            if(!visited[i]){
-                dfs(i, isConnected, visited);
-                province++;
+        int province = 0; // Initialize province count to 0
+        boolean[] visited = new boolean[isConnected.length]; // Track visited nodes
+
+        // Loop through each city/node
+        for(int i = 0; i < visited.length; i++) {
+            // If the city/node hasn't been visited, start a DFS from it
+            if(!visited[i]) {
+                dfs(i, isConnected, visited); // Call DFS to visit all connected cities
+                province++; // Increment province count after visiting a new component
             }
         }
-        return province;
+        return province; // Return the total number of provinces
     }
-    public void dfs(int current, int[][] graph, boolean[] visited){
-        visited[current] = true;
-        for(int i=0; i<graph[current].length;i++){
-                // current ke univisited neighbours pe dfs call krlo
+
+    // Helper method to perform DFS traversal
+    public void dfs(int current, int[][] graph, boolean[] visited) {
+        visited[current] = true; // Mark the current node as visited
+
+        // Loop through all nodes to find neighbors of the current node
+        for(int i = 0; i < graph[current].length; i++) {
+            // If there is an unvisited neighbor (connected city), call DFS on it
             if(!visited[i] && graph[current][i] == 1)
-                dfs(i, graph, visited);
+                dfs(i, graph, visited); // Recursively visit all connected nodes
         }
     }
 }
+
 
 ```
 **Same q is given**
